@@ -161,7 +161,7 @@ uint32_t gpio_lines[METAL_MAX_GPIO_INTERRUPTS];
 uint32_t timer_isr_counter = 0;
 uint32_t button_isr_counter = 0;
 
-/* Main - Setup PLIC interrupt handling and describe how to trigger interrupt */
+/* Main - Setup CLINT interrupt handling and describe how to trigger interrupt */
 int main() {
 
     uint32_t i, mode = MTVEC_MODE_CLINT_VECTORED;
@@ -179,8 +179,7 @@ int main() {
 
 #if GPIO_PRESENT
 
-    /* Here we enable Arty Buttons which are GPIOs to fire interrupt line,
-     * whether it's connected to the plic or clint or clint
+    /* Here we enable Arty Buttons which are GPIOs to fire interrupt lines
      */
 #if __MEE_DT_MAX_GPIOS > 1
 #error "Make sure to select the proper GPIO module for this demo!"
