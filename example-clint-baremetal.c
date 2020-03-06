@@ -191,13 +191,19 @@ int main() {
     }
 #endif
 
+    /* Enable each standard Arty GPIO button as input with interrupt enabled
+     * see __metal_driver_sifive_gpio_button_pin() for reference.  The
+     * standard cores use GPIO 4-7 for this.
+     */
+    gpio_enable_io(4, INPUT, ENABLE);
+    gpio_enable_io(5, INPUT, ENABLE);
+    gpio_enable_io(6, INPUT, ENABLE);
+    gpio_enable_io(7, INPUT, ENABLE);
+  
     for (i = 0; i < METAL_MAX_GPIO_INTERRUPTS; i++) {
 
         /* Get the actual interrupt line number and populate our array */
         gpio_lines[i] = __metal_driver_sifive_gpio0_interrupt_lines(ggpio, i);
-
-        /* Enable all as input with interrupts enabled to support buttons if they exist */
-        gpio_enable_io(gpio_lines[i], INPUT, ENABLE);
     }
 
 #endif  // #if GPIO_PRESENT
